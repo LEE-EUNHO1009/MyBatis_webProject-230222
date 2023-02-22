@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.eunocompany.home5.dao.Mapper;
+import com.eunocompany.home5.dto.MemberDto;
 
 import oracle.net.aso.r;
 
@@ -69,9 +70,29 @@ public class HomeController {
 			session.setAttribute("ValidMem", "yes");
 			model.addAttribute("memberid", mid);
 			
-			
 		} 
 		return "loginOk";
+	}
+	@RequestMapping(value = "/logOut")
+	public String logOut(HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
+		session.invalidate(); //로그아웃
+		
+		return "redirect:index";
+	}
+	@RequestMapping(value = "/memberInfo")
+	public String memberInfo(HttpServletRequest request, Model model) {
+		
+		HttpSession session = request.getSession();
+		String sessionId = (String) session.getAttribute("sessionid");//현재 로그인한 회원의 아이디
+		
+		Mapper dao = sqlSession.getMapper(Mapper.class);
+		MemberDto memberDto = dao.memberInfo(sessionId);
+		
+		model.addAttribute("memberDto", memberDto);
+		
+		return "memberInfo";
 	}
 
 }
