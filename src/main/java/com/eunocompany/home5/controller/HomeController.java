@@ -69,10 +69,9 @@ public class HomeController {
 			session.setAttribute("ValidMem", "yes");
 			model.addAttribute("memberid", mid);
 			
-			return "loginOk";
-		} else {
-			return "redirect:login";
-		}
+			
+		} 
+		return "loginOk";
 	}
 
 }

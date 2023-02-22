@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!DOCTYPE mapper
-   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-   
-<mapper namespace="com.eunocompany.home5.dao.Mapper">
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.gyojincompany.home5.dao.mapper">
 	<insert id="joinDao">
 		INSERT INTO batis_member(mid, mpw, mname, memail) VALUES (#{param1},#{param2},#{param3},#{param4})
 	</insert>
+	
 	<select id="loginCheck" resultType="int">
-		SELECT COUNT(*) FROM batis_member WHERE mid=#{param1} AND #{param2}
+		SELECT COUNT(*) FROM batis_member WHERE mid=#{param1} AND mpw=#{param2}
 	</select>
-</mapper>
+	
+</mapper>	

@@ -13,7 +13,7 @@
 	아이디 : <input type="text" name="mid"><br><br>
 	비밀번호 : <input type="password" name="mpw"><br><br>
 	<input type="submit" value="로그인">
-	<input type="button" value="회원 가입" onclick="javascript:window.location='join'">
+	<input type="button" value="회원가입" onclick="javascript:window.location='join'">
 	</form>
 </body>
 </html>
