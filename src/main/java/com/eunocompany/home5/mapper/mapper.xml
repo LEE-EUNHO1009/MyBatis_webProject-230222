@@ -4,7 +4,7 @@
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.gyojincompany.home5.dao.mapper">
+<mapper namespace="com.eunocompany.home5.dao.Mapper">
 	<insert id="joinDao">
 		INSERT INTO batis_member(mid, mpw, mname, memail) VALUES (#{param1},#{param2},#{param3},#{param4})
 	</insert>
