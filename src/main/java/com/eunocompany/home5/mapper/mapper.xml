@@ -19,4 +19,9 @@
 	<select id="memberInfo" resultType="com.eunocompany.home5.dto.MemberDto">
 		SELECT * FROM batis_member WHERE mid=#{param1}
 	</select>
+	
+	<!-- 회원 정보 삭제 SQL -->
+	<delete id="memberDelete">
+		DELETE FROM batis_member WHERE mid=#{param1}
+	</delete>
 </mapper>	

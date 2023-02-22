@@ -25,6 +25,11 @@ public class HomeController {
 		
 		return "index";
 	}
+	@RequestMapping(value = "/index")
+	public String index2() {
+		
+		return "index";
+	}
 	
 	@RequestMapping(value = "/join")
 	public String join() {
@@ -94,5 +99,56 @@ public class HomeController {
 		
 		return "memberInfo";
 	}
-
+	@RequestMapping(value = "/memberDelete")
+	public String memberDelete(HttpServletRequest request, Model model) {
+		
+		HttpSession session = request.getSession();
+		String sessionId = (String) session.getAttribute("sessionid");//현재 로그인한 회원의 아이디
+		
+		Mapper dao = sqlSession.getMapper(Mapper.class);
+		dao.memberDelete(sessionId);  //회원 정보 삭제 -> 회원 탈퇴
+		
+		return "redirect:index";
+	}
+	@RequestMapping(value = "/writeForm")
+	public String writeForm(HttpServletRequest request, Model model) {
+		
+		HttpSession session = request.getSession();
+		String sessionId = (String) session.getAttribute("sessionid");//현재 로그인한 회원의 아이디
+		
+		Mapper dao = sqlSession.getMapper(Mapper.class);
+		
+		if(session == null) { //로그인하지 않은 상태
+			model.addAttribute("mid", "GUEST");
+			model.addAttribute("mname", "비회원");
+		}else { //로그인한 상태
+			MemberDto memberDto = dao.memberInfo(sessionId);  //현재 로그인한 회원의 모든 정보 가져오기
+			model.addAttribute("mid", memberDto.getMid());
+			model.addAttribute("mname",  memberDto.getMname());
+		}
+		return "writeForm";
+	}
+	@RequestMapping(value = "/write")
+	public String write(HttpServletRequest request, Model model) {
+		
+		HttpSession session = request.getSession();
+		String sessionId = (String) session.getAttribute("sessionid");//현재 로그인한 회원의 아이디
+		
+		Mapper dao = sqlSession.getMapper(Mapper.class);
+		
+		String btitle = request.getParameter("btitle"); //글제목
+		String bcontent = request.getParameter("bcontent"); //글내용
+		String bmid =null;
+		String bname =null;
+		
+		if(session == null) { //로그인하지 않은 상태
+			bmid="GUEST";
+			bname = "비회원";
+		}else { //로그인한 상태
+			MemberDto memberDto = dao.memberInfo(sessionId);  //현재 로그인한 회원의 모든 정보 가져오기
+			bmid = memberDto.getMid();
+			bname =  memberDto.getMname();
+		}
+		return "redirect:list";
+	}
 }

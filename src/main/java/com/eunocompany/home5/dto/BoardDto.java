@@ -6,7 +6,6 @@ public class BoardDto {
 	private int bid; //게시판 번호
 	private String btitle;  //게시판 글 제목
 	private String bcontent;  //게시판 글 내용
-	private int bhit;  //게시판 조회수
 	private Timestamp bdate;  //글쓴 일시
 	private String bmid;  //글쓴이 아이디
 	private String bmname;  //글쓴 사람 이름
@@ -16,12 +15,11 @@ public class BoardDto {
 		// TODO Auto-generated constructor stub
 	}
 
-	public BoardDto(int bid, String btitle, String bcontent, int bhit, Timestamp bdate, String bmid, String bmname) {
+	public BoardDto(int bid, String btitle, String bcontent, Timestamp bdate, String bmid, String bmname) {
 		super();
 		this.bid = bid;
 		this.btitle = btitle;
 		this.bcontent = bcontent;
-		this.bhit = bhit;
 		this.bdate = bdate;
 		this.bmid = bmid;
 		this.bmname = bmname;
@@ -49,14 +47,6 @@ public class BoardDto {
 
 	public void setBcontent(String bcontent) {
 		this.bcontent = bcontent;
-	}
-
-	public int getBhit() {
-		return bhit;
-	}
-
-	public void setBhit(int bhit) {
-		this.bhit = bhit;
 	}
 
 	public Timestamp getBdate() {

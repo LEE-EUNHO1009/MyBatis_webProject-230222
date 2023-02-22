@@ -10,12 +10,12 @@
 	<h2>회원가입</h2>
 	<hr>
 	<form action="joinOk" method="post">
-	아이디 : <input type="text" name="mid"><br><br>
-	비밀번호 : <input type="text" name="mpw"><br><br>
-	이름 : <input type="text" name="mname"><br><br>
-	이메일 : <input type="text" name="memail"><br><br>
-	<input type="submit" value="회원가입">
-	<input type="button" value="로그인" onclick="javascript:window.location='login'">
+		아이디 : <input type="text" name="mid"><br><br>
+		비밀번호 : <input type="text" name="mpw"><br><br>
+		이름 : <input type="text" name="mname"><br><br>
+		이메일 : <input type="text" name="memail"><br><br>
+		<input type="submit" value="회원가입">
+		<input type="button" value="로그인" onclick="javascript:window.location='login'">
 	</form>
 </body>
 </html>
