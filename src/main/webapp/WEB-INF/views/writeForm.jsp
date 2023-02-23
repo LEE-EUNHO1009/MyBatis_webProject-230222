@@ -10,12 +10,12 @@
 	<h2>게시판 글쓰기</h2>
 	<hr>
 	<form action="write">
-		아이디 : [${mid }]<br><br>
-		이름 : [${mname }]<br><br>
-		제목 : <input type="text" name="btitle"><br><br>
-		내용 : <textarea rows="10" cols="45" name="bcontent"></textarea><br><br>
+		아이디 : [${mid }]<br><br> 
+		이 름 : [${mname }]<br><br>
+		제 목 : <input type="text" name="btitle" size="60"><br><br>
+		내 용 : <textarea rows="10" cols="45" name="bcontent"></textarea><br><br>
 		<input type="submit" value="글입력">
-		<input type="button" value="글목록" onclick="javascript:window.location='list'">
+		<input type="button" value="글목록" onclick="javascript:window.location='list'">	
 	</form>
 </body>
 </html>

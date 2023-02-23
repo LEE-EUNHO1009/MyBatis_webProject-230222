@@ -1,5 +1,7 @@
 package com.eunocompany.home5.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -10,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.eunocompany.home5.dao.Mapper;
+import com.eunocompany.home5.dto.BoardDto;
 import com.eunocompany.home5.dto.MemberDto;
 
 import oracle.net.aso.r;
@@ -149,6 +152,19 @@ public class HomeController {
 			bmid = memberDto.getMid();
 			bname =  memberDto.getMname();
 		}
+		
+		dao.writeDao(btitle, bcontent, bmid, bname);
+		return "redirect:list";
+	}
+	@RequestMapping(value = "/list")
+	public String list(HttpServletRequest request, Model model) {
+		
+		Mapper dao = sqlSession.getMapper(Mapper.class);
+		
+		List<BoardDto> boardDtos = dao.listDao(); //모든 글 목록 가져오기
+		
+		model.addAttribute("boardDtos", boardDtos);
+		
 		return "redirect:list";
 	}
 }
