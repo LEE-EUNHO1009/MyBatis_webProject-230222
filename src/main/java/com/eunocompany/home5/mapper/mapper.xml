@@ -51,4 +51,11 @@
 			FROM batis_board
 				ORDER BY bid DESC
 	</select>
+	
+	<!-- 클릭한 번호의 글 내용 가져오기 SQL -->
+	<select id="contentViewDao" resultType="com.eunocompany.home5.dto.BoardDto">
+		SELECT * 
+			FROM batis_board
+				WHERE bid=#{param1} 
+	</select>
 </mapper>	
