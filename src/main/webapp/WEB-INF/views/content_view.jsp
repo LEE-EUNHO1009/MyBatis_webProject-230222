@@ -9,7 +9,7 @@
 <body>
 	<h2>글 내용 보기</h2>
 	<hr>
-	<form action="joinOk" method="post">
+	
 		글번호 : #{boardDto.bid }<br><br>
 		글쓴 사람 : #{boardDto.bmname }<br><br>
 		글쓴 아이디 : #{boardDto.bmid }<br><br>
@@ -19,6 +19,6 @@
 		<input type="button" value="글수정" onclick="javascript:window.location=''">
 		<input type="button" value="글삭제" onclick="javascript:window.location=''">
 		<input type="button" value="글목록" onclick="javascript:window.location='list'">
-	</form>
+	
 </body>
 </html>
