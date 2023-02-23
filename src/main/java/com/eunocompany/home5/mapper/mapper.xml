@@ -26,13 +26,14 @@
 	</delete>
 	
 	<!-- 게시판 글쓰기 SQL -->
-	<insert id="">
+	<insert id="writeDao">
 		INSERT INTO batis_board
 			(
-			btitle
-			,bcontent
-			,bmid
-			,bmname
+			bid
+			, btitle
+			, bcontent
+			, bmid
+			, bmname
 			) 
 			VALUES 
 			(

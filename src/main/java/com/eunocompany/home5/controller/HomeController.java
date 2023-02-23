@@ -28,6 +28,7 @@ public class HomeController {
 		
 		return "index";
 	}
+	
 	@RequestMapping(value = "/index")
 	public String index2() {
 		
@@ -77,18 +78,19 @@ public class HomeController {
 			session.setAttribute("sessionid", mid);
 			session.setAttribute("ValidMem", "yes");
 			model.addAttribute("memberid", mid);
-			
 		} 
 		return "loginOk";
 	}
-	@RequestMapping(value = "/logOut")
-	public String logOut(HttpServletRequest request) {
+	
+	@RequestMapping(value = "/logout")
+	public String logout(HttpServletRequest request) {
 		
 		HttpSession session = request.getSession();
-		session.invalidate(); //로그아웃
+		session.invalidate();//로그아웃
 		
 		return "redirect:index";
 	}
+	
 	@RequestMapping(value = "/memberInfo")
 	public String memberInfo(HttpServletRequest request, Model model) {
 		
@@ -102,6 +104,7 @@ public class HomeController {
 		
 		return "memberInfo";
 	}
+	
 	@RequestMapping(value = "/memberDelete")
 	public String memberDelete(HttpServletRequest request, Model model) {
 		
@@ -109,10 +112,11 @@ public class HomeController {
 		String sessionId = (String) session.getAttribute("sessionid");//현재 로그인한 회원의 아이디
 		
 		Mapper dao = sqlSession.getMapper(Mapper.class);
-		dao.memberDelete(sessionId);  //회원 정보 삭제 -> 회원 탈퇴
+		dao.memberDelete(sessionId);//회원정보삭제->회원탈퇴
 		
 		return "redirect:index";
 	}
+	
 	@RequestMapping(value = "/writeForm")
 	public String writeForm(HttpServletRequest request, Model model) {
 		
@@ -121,16 +125,18 @@ public class HomeController {
 		
 		Mapper dao = sqlSession.getMapper(Mapper.class);
 		
-		if(session == null) { //로그인하지 않은 상태
+		if(sessionId == null) { //로그인 하지 않은 상태
 			model.addAttribute("mid", "GUEST");
 			model.addAttribute("mname", "비회원");
-		}else { //로그인한 상태
-			MemberDto memberDto = dao.memberInfo(sessionId);  //현재 로그인한 회원의 모든 정보 가져오기
+		} else { //로그인 한 상태
+			MemberDto memberDto = dao.memberInfo(sessionId);//현재 로그인한 회원의 모든정보 가져오기
 			model.addAttribute("mid", memberDto.getMid());
-			model.addAttribute("mname",  memberDto.getMname());
+			model.addAttribute("mname", memberDto.getMname());
 		}
+		
 		return "writeForm";
 	}
+	
 	@RequestMapping(value = "/write")
 	public String write(HttpServletRequest request, Model model) {
 		
@@ -139,32 +145,35 @@ public class HomeController {
 		
 		Mapper dao = sqlSession.getMapper(Mapper.class);
 		
-		String btitle = request.getParameter("btitle"); //글제목
-		String bcontent = request.getParameter("bcontent"); //글내용
-		String bmid =null;
-		String bname =null;
+		String btitle = request.getParameter("btitle");//글제목
+		String bcontent = request.getParameter("bcontent");//글내용
+		String bmid = null;
+		String bmname = null;
 		
-		if(session == null) { //로그인하지 않은 상태
-			bmid="GUEST";
-			bname = "비회원";
-		}else { //로그인한 상태
-			MemberDto memberDto = dao.memberInfo(sessionId);  //현재 로그인한 회원의 모든 정보 가져오기
+		if(sessionId == null) { //로그인 하지 않은 상태
+			bmid = "GUEST";
+			bmname = "비회원";
+			
+		} else { //로그인 한 상태
+			MemberDto memberDto = dao.memberInfo(sessionId);//현재 로그인한 회원의 모든정보 가져오기
 			bmid = memberDto.getMid();
-			bname =  memberDto.getMname();
+			bmname = memberDto.getMname();
 		}
 		
-		dao.writeDao(btitle, bcontent, bmid, bname);
+		dao.writeDao(btitle, bcontent, bmid, bmname);
+		
 		return "redirect:list";
 	}
+	
 	@RequestMapping(value = "/list")
 	public String list(HttpServletRequest request, Model model) {
 		
 		Mapper dao = sqlSession.getMapper(Mapper.class);
 		
-		List<BoardDto> boardDtos = dao.listDao(); //모든 글 목록 가져오기
+		List<BoardDto> boardDtos = dao.listDao();//모든 글 목록 가져오기
 		
 		model.addAttribute("boardDtos", boardDtos);
 		
-		return "redirect:list";
+		return "list";
 	}
 }
